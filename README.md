@@ -22,7 +22,7 @@ To test the example application run the following commands.
 
 * By default (you can change this in the config.yml) the server will listen to port 8080 and 8081. To create a new claim run:
 
-	```curl http://localhost:8080/claims -H "Content-Type: application/json" -d '{"timeOfIncident":"2017-02-01T10:00:00", "amount": 2000 }'```
+	```curl http://localhost:8080/claims -H "Content-Type: application/json" -d '{"dateOfIncident":"2017-02-01", "amount": 2000 }'```
 	
 	```curl -X GET http://localhost:8080/claims```
 
