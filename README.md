@@ -32,3 +32,5 @@ To test the example application run the following commands.
 If you want to explore the code in Eclipse, first clone the repository. Then run ```File -> Import -> Maven -> Existing Maven Projects``` and select the folder with your local clone of the repository. 
 
 * To run the server, create a Java launch configuration for the ```RiskManagementServerApplication``` Main-Class and specify ```server config.yml``` as arguments. You can then run the server.
+
+[Launch Configuration]: https://raw.githubusercontent.com/web-apis/riskmanagement-server/master/img/eclipse-launch-configuration.png 
