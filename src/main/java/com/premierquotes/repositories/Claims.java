@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,24 @@ import com.premierquotes.models.Claim;
 public class Claims {
 
 	private Map<UUID, Claim> claims = new HashMap<>();
+
+	/**
+	 * For demonstration purposes, the constructor initializes with some
+	 * randomly generated claims.
+	 */
+	public Claims() {
+		Random random = new Random(8640);
+		for (int year = 2010; year <= 2017; year++) {
+			// Generate some claims for each year:
+			for (int i = random.nextInt(5); i > 0; i--) {
+				int month = random.nextInt(12) + 1;
+				int day = random.nextInt(28) + 1;
+				LocalDate date = LocalDate.of(year, month, day);
+				Claim claim = new Claim(date, random.nextInt(10_000));
+				claims.put(claim.getId(), claim);
+			}
+		}
+	}
 
 	public Claim create(LocalDate dateOfIncident, double amount) {
 		Claim claim = new Claim(dateOfIncident, amount);
