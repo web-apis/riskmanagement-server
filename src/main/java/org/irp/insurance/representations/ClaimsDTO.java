@@ -1,4 +1,4 @@
-package com.premierquotes.representations;
+package org.irp.insurance.representations;
 
 import java.util.List;
 
@@ -7,8 +7,7 @@ import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLink.Style;
 import org.glassfish.jersey.linking.InjectLinks;
 import org.glassfish.jersey.server.Uri;
-
-import com.premierquotes.resources.ClaimManagement;
+import org.irp.insurance.resources.ClaimManagement;
 
 public class ClaimsDTO {
 
@@ -27,6 +26,13 @@ public class ClaimsDTO {
 		this.claims = claims;
 	}
 
+	/**
+	 * We use Jersey specific annotations (not part of JAX-RS) to generate the
+	 * HATEOAS link relations for pagination automatically.
+	 * 
+	 * See https://jersey.java.net/documentation/latest/declarative-linking.html
+	 * for a more detailed documentation.
+	 */
 	@InjectLinks({
 			@InjectLink(resource = ClaimManagement.class, method = "listClaims", style = Style.ABSOLUTE, bindings = {
 					@Binding(name = "offset", value = "${instance.offset}"),

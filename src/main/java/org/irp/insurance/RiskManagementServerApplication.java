@@ -1,4 +1,4 @@
-package com.premierquotes;
+package org.irp.insurance;
 
 import java.util.EnumSet;
 
@@ -7,10 +7,9 @@ import javax.servlet.FilterRegistration.Dynamic;
 
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.glassfish.jersey.linking.DeclarativeLinkingFeature;
-
-import com.premierquotes.repositories.Claims;
-import com.premierquotes.resources.ClaimManagement;
-import com.premierquotes.resources.RiskReport;
+import org.irp.insurance.repositories.Claims;
+import org.irp.insurance.resources.ClaimManagement;
+import org.irp.insurance.resources.RiskReport;
 
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;

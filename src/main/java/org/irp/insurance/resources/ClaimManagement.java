@@ -1,4 +1,4 @@
-package com.premierquotes.resources;
+package org.irp.insurance.resources;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,11 +22,12 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
+import org.irp.insurance.models.Claim;
+import org.irp.insurance.repositories.Claims;
+import org.irp.insurance.representations.ClaimDTO;
+import org.irp.insurance.representations.ClaimsDTO;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.premierquotes.models.Claim;
-import com.premierquotes.repositories.Claims;
-import com.premierquotes.representations.ClaimDTO;
-import com.premierquotes.representations.ClaimsDTO;
 
 @Path("/claims")
 @Produces(value = MediaType.APPLICATION_JSON)
@@ -53,18 +54,18 @@ public class ClaimManagement {
 		this.claims = claims;
 	}
 
-	// curl http://localhost:8080/claims -H "Content-Type: application/json" -d
-	// '{"dateOfIncident":"2007-12-03T10:15:30", "amount":123 }'
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ClaimDTO openClaim(@NotNull @Valid OpenClaimParameters params) {
+	public ClaimDTO openClaim(
+			@NotNull @Valid OpenClaimParameters params) {
 		return ClaimDTO.create(claims.create(LocalDate.parse(params.dateOfIncident), params.amount));
 	}
 
-	// curl http://localhost:8080/claims\?limit\=10\&offset\=0
 	@GET
-	public ClaimsDTO listClaims(@DefaultValue("3") @QueryParam("limit") Integer limit,
-			@DefaultValue("0") @QueryParam("offset") Integer offset, @QueryParam("orderBy") String orderBy) {
+	public ClaimsDTO listClaims(
+			@QueryParam("limit") @DefaultValue("3") Integer limit,
+			@QueryParam("offset") @DefaultValue("0") Integer offset, 
+			@QueryParam("orderBy") String orderBy) {
 		List<ClaimDTO> result = claims.list(limit, offset, orderBy).stream().map(ClaimDTO::create)
 				.collect(Collectors.toList());
 		return new ClaimsDTO(limit, offset, claims.getSize(), orderBy, result);
@@ -72,13 +73,16 @@ public class ClaimManagement {
 
 	@GET
 	@Path("/{claimId}")
-	public ClaimDTO getClaimById(@PathParam("claimId") UUID claimId) {
+	public ClaimDTO getClaimById(
+			@PathParam("claimId") UUID claimId) {
 		return claims.findById(claimId).map(ClaimDTO::create).orElseThrow(noSuchClaim);
 	}
 
 	@PUT
 	@Path("/{claimId}")
-	public ClaimDTO updateClaim(@PathParam("claimId") UUID claimId, @NotNull @Valid Claim claim) {
+	public ClaimDTO updateClaim(
+			@PathParam("claimId") UUID claimId, 
+			@NotNull @Valid Claim claim) {
 		boolean result = claims.update(claim);
 		if (!result) {
 			throw noSuchClaim.get();
@@ -88,7 +92,8 @@ public class ClaimManagement {
 
 	@POST
 	@Path("/{claimId}/evidence")
-	public ClaimDTO addEvidenceToClaim(@PathParam("claimId") UUID claimId,
+	public ClaimDTO addEvidenceToClaim(
+			@PathParam("claimId") UUID claimId,
 			@NotNull @Valid AddEvidenceParameters params) {
 		Claim claim = claims.findById(claimId).orElseThrow(noSuchClaim);
 		claim.addEvidence(params.evidence);
@@ -97,7 +102,8 @@ public class ClaimManagement {
 
 	@DELETE
 	@Path("/{claimId}/evidence/{evidenceId}")
-	public ClaimDTO deleteEvidenceFromClaim(@PathParam("claimId") UUID claimId,
+	public ClaimDTO deleteEvidenceFromClaim(
+			@PathParam("claimId") UUID claimId,
 			@PathParam("evidenceId") UUID evidenceId) {
 		Claim claim = claims.findById(claimId).orElseThrow(noSuchClaim);
 		// TODO check if valid evidenceId

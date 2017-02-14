@@ -1,4 +1,4 @@
-package com.premierquotes.repositories;
+package org.irp.insurance.repositories;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.premierquotes.models.Claim;
+import org.irp.insurance.models.Claim;
 
 public class Claims {
 

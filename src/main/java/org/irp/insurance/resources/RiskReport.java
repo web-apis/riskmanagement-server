@@ -1,4 +1,4 @@
-package com.premierquotes.resources;
+package org.irp.insurance.resources;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,9 +11,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import com.premierquotes.models.Claim;
-import com.premierquotes.models.RiskAssessment;
-import com.premierquotes.repositories.Claims;
+import org.irp.insurance.models.Claim;
+import org.irp.insurance.models.RiskAssessment;
+import org.irp.insurance.repositories.Claims;
 
 @Path("/riskreport")
 @Produces(value = MediaType.APPLICATION_JSON)

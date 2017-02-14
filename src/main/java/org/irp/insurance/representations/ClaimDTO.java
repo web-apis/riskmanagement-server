@@ -1,4 +1,4 @@
-package com.premierquotes.representations;
+package org.irp.insurance.representations;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,10 +8,9 @@ import org.glassfish.jersey.linking.InjectLink;
 import org.glassfish.jersey.linking.InjectLinks;
 import org.glassfish.jersey.linking.InjectLink.Style;
 import org.glassfish.jersey.server.Uri;
-
-import com.premierquotes.models.Claim;
-import com.premierquotes.models.Evidence;
-import com.premierquotes.resources.ClaimManagement;
+import org.irp.insurance.models.Claim;
+import org.irp.insurance.models.Evidence;
+import org.irp.insurance.resources.ClaimManagement;
 
 public class ClaimDTO {
 

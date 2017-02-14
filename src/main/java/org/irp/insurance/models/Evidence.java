@@ -1,4 +1,4 @@
-package com.premierquotes.models;
+package org.irp.insurance.models;
 
 import java.util.UUID;
 
